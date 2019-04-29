@@ -1,9 +1,10 @@
-import tensorflow as tf
+import os
+#os.environ['LD_LIBRARY_PATH']='/usr/local/cuda/lib64'
 
+import tensorflow as tf
 from google.protobuf import text_format
 from proto.eval_config_pb2 import EvalConfig
 from core import evaluator_interactive as evaluator
-import os
 tf.logging.set_verbosity(tf.logging.INFO)
 
 flags = tf.app.flags

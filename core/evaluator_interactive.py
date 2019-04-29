@@ -121,13 +121,13 @@ class ImageWrapper(object):
             self.scale = 4
             self.im_1280 = im
             #self.im_1280 = cv2.resize(self.im, (self.im.shape[1]/2, self.im.shape[0]/2), interpolation=cv2.INTER_AREA)
-            self.im_640 = cv2.resize(self.im_1280, (self.im_1280.shape[1]/2, self.im_1280.shape[0]/2), interpolation=cv2.INTER_AREA)
-            self.im_320 = cv2.resize(self.im_640, (self.im_640.shape[1]/2, self.im_640.shape[0]/2), interpolation=cv2.INTER_AREA)
+            self.im_640 = cv2.resize(self.im_1280, (self.im_1280.shape[1]//2, self.im_1280.shape[0]//2), interpolation=cv2.INTER_AREA)
+            self.im_320 = cv2.resize(self.im_640, (self.im_640.shape[1]//2, self.im_640.shape[0]//2), interpolation=cv2.INTER_AREA)
         elif np.max(im.shape) > 640:
             self.scale = 2
             self.im_1280 = None
             self.im_640 = im
-            self.im_320 = cv2.resize(self.im_640, (self.im_640.shape[1]/2, self.im_640.shape[0]/2), interpolation=cv2.INTER_AREA)
+            self.im_320 = cv2.resize(self.im_640, (self.im_640.shape[1]//2, self.im_640.shape[0]//2), interpolation=cv2.INTER_AREA)
         else:
             self.scale = 1
             self.im_1280 = None
@@ -208,7 +208,7 @@ class RenderDoF(object):
             im = im.astype(np.float32) / 255
             im = ImageWrapper(im, aperture=self.slider.val/10.0)
             self.im = im
-            print self.im_names[self.id]
+            print(self.im_names[self.id])
         except:
             start_id = self.id
             exit()

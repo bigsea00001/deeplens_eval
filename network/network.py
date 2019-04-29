@@ -84,7 +84,7 @@ class Network(object):
         assert len(args) != 0
         self.terminals = []
         for fed_layer in args:
-            if isinstance(fed_layer, basestring):
+            if isinstance(fed_layer, str):
                 try:
                     fed_layer = self.layers[fed_layer]
                 except KeyError:
@@ -150,7 +150,7 @@ class Network(object):
             assert s_h == 1 and s_w == 1
             convolve = lambda i, k: tf.nn.atrous_conv2d(i, k, dilation_rate, padding=padding)
         with tf.variable_scope(name) as scope:
-            kernel = self.make_var('weights', shape=[k_h, k_w, c_i / group, c_o], weight_decay=weight_decay, initializer=DEFAULT_INIT)
+            kernel = self.make_var('weights', shape=[k_h, k_w, c_i // group, c_o], weight_decay=weight_decay, initializer=DEFAULT_INIT)
             if group == 1:
                 # This is the common-case. Convolve the input without any further complications.
                 output = convolve(input, kernel)
